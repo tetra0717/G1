@@ -9,7 +9,21 @@ def add_list_parser(subparsers) -> None:
 
 def cmd_list(args) -> int:
     """``share list`` コマンドのハンドラ."""
-    # TODO: Dropbox インスタンスの取得と共有リンクの一覧表示の実装
+    from share.client import get_client
+
+    dbx = get_client()
+    if dbx is None:
+        print("エラー: 認証が必要です。")
+        print("'share auth' を実行してください。")
+        return 1
+
+    links = list_shared_links(dbx)
+    if not links:
+        print("共有リンクはまだありません。")
+        return 0
+
+    for link in links:
+        print(f"{link['name']}\t{link['url']}")
     return 0
 
 def list_shared_links(dbx) -> list[dict]:

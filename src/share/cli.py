@@ -4,7 +4,7 @@ import argparse
 import logging
 import sys
 
-from share import auth, upload, create, remove, list
+from share import auth, upload, create, remove, list as list_cmd
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -16,8 +16,7 @@ def build_parser() -> argparse.ArgumentParser:
     upload.add_upload_parser(sub)
     create.add_create_parser(sub)
     remove.add_remove_parser(sub)
-    list.add_list_parser(sub)
-    # TODO: link, list, revoke のサブコマンドを追加
+    list_cmd.add_list_parser(sub)
 
     return parser
 

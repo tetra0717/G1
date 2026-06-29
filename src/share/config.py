@@ -1,10 +1,12 @@
 """設定・定数管理."""
 
+import os
 import platform
 from pathlib import Path
 
 # Dropbox App Key（PKCE方式）
-DROPBOX_APP_KEY = "ucgn1atuk1amz9l"
+# 環境変数 SHARE_APP_KEY があればそれを優先（個人検証用に自分のアプリキーを使える）。
+DROPBOX_APP_KEY = os.environ.get("SHARE_APP_KEY", "ucgn1atuk1amz9l")
 
 # Dropbox API 設定
 DEFAULT_SCOPES = [
